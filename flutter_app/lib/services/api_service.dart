@@ -110,8 +110,10 @@ class ApiService {
     try {
       // Déterminer le membre (12001 pour Orange, 12002 pour MTN)
       String toMember = '12002'; // Par défaut MTN
-      if (beneficiaryPhone.startsWith('69') || beneficiaryPhone.startsWith('65')) {
+      if (beneficiaryPhone.startsWith('65') || beneficiaryPhone.startsWith('69')) {
         toMember = '12001'; // Orange
+      } else if (beneficiaryPhone.startsWith('67') || beneficiaryPhone.startsWith('68')) {
+        toMember = '12002'; // MTN
       }
 
       final response = await http.post(
