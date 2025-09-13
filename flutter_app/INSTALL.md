@@ -31,6 +31,10 @@ flutter doctor
 # Naviguer vers le répertoire du projet
 cd flutter_app
 
+# Créer le fichier local.properties pour Android
+echo "sdk.dir=/path/to/your/android/sdk" > android/local.properties
+echo "flutter.sdk=/path/to/your/flutter/sdk" >> android/local.properties
+
 # Installer les dépendances
 flutter pub get
 
@@ -40,6 +44,8 @@ flutter doctor
 # Lister les appareils disponibles
 flutter devices
 ```
+
+**Important**: Le fichier `android/local.properties` doit être créé localement avec vos chemins SDK corrects. Ce fichier n'est pas versionné car il est spécifique à chaque machine.
 
 ## Lancement de l'application
 

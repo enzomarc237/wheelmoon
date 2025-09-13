@@ -46,6 +46,12 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
       return;
     }
 
+    // Vérifier que le mot de passe du compte bancaire fait 6 chiffres
+    if (widget.account.motDePasse.length != 6 || !RegExp(r'^\d{6}$').hasMatch(widget.account.motDePasse)) {
+      _showError('Le mot de passe du compte bancaire doit contenir 6 chiffres');
+      return;
+    }
+
     setState(() => _isLoading = true);
 
     try {
@@ -150,7 +156,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
           children: [
             // Sélection initiation
             const Text(
-              'Sélecte initiation',
+              'Sélection initiation',
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             const SizedBox(height: 12),
@@ -230,7 +236,9 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                         FilteringTextInputFormatter.digitsOnly,
                         TextInputFormatter.withFunction((oldValue, newValue) {
                           if (newValue.text.isEmpty) return newValue;
-                          final number = int.tryParse(newValue.text);
+                          // Strip any existing commas before parsing
+                          final raw = newValue.text.replaceAll(',', '');
+                          final number = int.tryParse(raw);
                           if (number == null) return oldValue;
                           final formatted = number.toString().replaceAllMapped(
                             RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
@@ -257,7 +265,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Touver numérial',
+              'Clavier numérique',
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
             const SizedBox(height: 24),
@@ -297,7 +305,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                         Icon(Icons.phone_android, color: Colors.white),
                         SizedBox(width: 8),
                         Text(
-                          'Virement vers un autre compte',
+                          'Transfert vers portefeuille mobile',
                           style: TextStyle(color: Colors.white),
                         ),
                       ],
@@ -309,7 +317,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
             ),
             const SizedBox(height: 8),
             const Text(
-              '- Limités de retrait quotidiennes/mensuelles',
+              '- Limites de retrait quotidiennes/mensuelles',
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
             const SizedBox(height: 24),
@@ -353,7 +361,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                       ),
                     ),
                     child: const Text(
-                      'Valider le retrait',
+                      'Annuler',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

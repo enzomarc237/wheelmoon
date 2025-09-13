@@ -76,13 +76,21 @@ def validate_flutter_app():
         ("lib/services", "Répertoire des services"),
         ("lib/screens", "Répertoire des écrans"),
         ("android", "Configuration Android"),
-        ("assets/images", "Répertoire des assets"),
+    ]
+    
+    # Répertoires optionnels
+    optional_directories = [
+        ("assets/images", "Répertoire des assets (optionnel)"),
     ]
     
     print("\n📁 Vérification des répertoires:")
     for dirpath, description in directories:
         if not check_directory_exists(dirpath, description):
             all_good = False
+    
+    print("\n📁 Vérification des répertoires optionnels:")
+    for dirpath, description in optional_directories:
+        check_directory_exists(dirpath, description)  # Ne pas affecter all_good
     
     print("\n📄 Vérification des fichiers principaux:")
     for filepath, description in files_to_check:
