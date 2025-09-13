@@ -21,7 +21,6 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
   final _amountController = TextEditingController();
   final _phoneController = TextEditingController();
   bool _isLoading = false;
-  String _selectedMethod = 'phone';
 
   String _formatCurrency(double amount) {
     return '${amount.toStringAsFixed(0)} XAF';

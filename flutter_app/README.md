@@ -71,7 +71,25 @@ flutter pub get
 
 # Lancer l'application
 flutter run
+
+# Lancer avec une URL de comptes personnalisée
+flutter run --dart-define=ACCOUNTS_URL=https://example.com/accounts.txt
 ```
+
+## Configuration
+
+### URL des comptes
+L'application peut charger les données de comptes depuis une URL externe en utilisant la variable d'environnement `ACCOUNTS_URL` :
+
+```bash
+# Exemple avec URL personnalisée
+flutter run --dart-define=ACCOUNTS_URL=https://votre-serveur.com/comptes.txt
+
+# Build de production avec URL
+flutter build apk --dart-define=ACCOUNTS_URL=https://api.production.com/accounts
+```
+
+Si aucune URL n'est fournie, l'application utilise les données d'exemple intégrées.
 
 ## Sécurité
 
