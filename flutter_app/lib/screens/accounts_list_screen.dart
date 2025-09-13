@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/compte_utilisateur.dart';
+import '../utils/format.dart';
 import 'account_detail_screen.dart';
 
 class AccountsListScreen extends StatelessWidget {
@@ -7,9 +8,6 @@ class AccountsListScreen extends StatelessWidget {
 
   const AccountsListScreen({super.key, required this.accounts});
 
-  String _formatCurrency(double amount) {
-    return '${amount.toStringAsFixed(0)} XAF';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +88,7 @@ class AccountsListScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            _formatCurrency(account.soldeTotal),
+                            FormatUtils.formatCurrency(account.soldeTotal),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,

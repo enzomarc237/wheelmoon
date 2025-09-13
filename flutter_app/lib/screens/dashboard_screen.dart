@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/compte_utilisateur.dart';
 import '../services/data_service.dart';
+import '../utils/format.dart';
 import 'accounts_list_screen.dart';
 import 'login_screen.dart';
 
@@ -65,9 +66,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return _accounts.fold(0.0, (sum, account) => sum + account.soldeTotal);
   }
 
-  String _formatCurrency(double amount) {
-    return '${amount.toStringAsFixed(0)} XAF';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +136,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        _formatCurrency(_totalBalance),
+                        FormatUtils.formatCurrencyWithSeparators(_totalBalance),
                         style: const TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
@@ -261,7 +259,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Expanded(
               child: _buildStatCard(
                 'Compte Chèques',
-                _formatCurrency(_getBalanceByType('CHEQUES')),
+                FormatUtils.formatCurrency(_getBalanceByType('CHEQUES')),
                 Colors.red[400]!,
                 'Derniers 4 chiffres masqués',
               ),
@@ -270,7 +268,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Expanded(
               child: _buildStatCard(
                 'Compte Épargne',
-                _formatCurrency(_getBalanceByType('EPARGNE')),
+                FormatUtils.formatCurrency(_getBalanceByType('EPARGNE')),
                 Colors.grey[400]!,
                 'Derniers 4 chiffres masqués',
               ),
@@ -283,7 +281,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Expanded(
               child: _buildStatCard(
                 'Compte Chèques',
-                _formatCurrency(_getBalanceByType('CHEQUES') * 0.6),
+                FormatUtils.formatCurrency(_getBalanceByType('CHEQUES') * 0.6),
                 const Color(0xFF2D3748),
                 'Solde 4 derniers',
               ),
@@ -292,7 +290,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Expanded(
               child: _buildStatCard(
                 'Compte Épargne',
-                _formatCurrency(_getBalanceByType('EPARGNE') * 0.8),
+                FormatUtils.formatCurrency(_getBalanceByType('EPARGNE') * 0.8),
                 Colors.teal[400]!,
                 'Solde 4 derniers',
               ),

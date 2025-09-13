@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/compte_utilisateur.dart';
+import '../utils/format.dart';
 import 'withdrawal_screen.dart';
 
 class AccountDetailScreen extends StatelessWidget {
@@ -7,9 +8,6 @@ class AccountDetailScreen extends StatelessWidget {
 
   const AccountDetailScreen({super.key, required this.account});
 
-  String _formatCurrency(double amount) {
-    return '${amount.toStringAsFixed(0)} XAF';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +98,7 @@ class AccountDetailScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            _formatCurrency(account.soldeTotal),
+                            FormatUtils.formatCurrency(account.soldeTotal),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -189,7 +187,7 @@ class AccountDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  _formatCurrency(bankAccount.solde),
+                                  FormatUtils.formatCurrency(bankAccount.solde),
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

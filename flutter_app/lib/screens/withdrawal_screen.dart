@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/compte_utilisateur.dart';
 import '../services/api_service.dart';
+import '../utils/format.dart';
 
 class WithdrawalScreen extends StatefulWidget {
   final CompteUtilisateur account;
@@ -22,9 +23,6 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
   final _phoneController = TextEditingController();
   bool _isLoading = false;
 
-  String _formatCurrency(double amount) {
-    return '${amount.toStringAsFixed(0)} XAF';
-  }
 
   Future<void> _processWithdrawal() async {
     final amount = double.tryParse(_amountController.text.replaceAll(',', ''));
@@ -117,7 +115,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
       builder: (context) => AlertDialog(
         title: const Text('Retrait Réussi'),
         content: Text(
-          'Le retrait de ${_formatCurrency(double.parse(_amountController.text.replaceAll(',', '')))} '
+          'Le retrait de ${FormatUtils.formatCurrency(double.parse(_amountController.text.replaceAll(',', '')))} '
           'vers ${_phoneController.text} a été effectué avec succès.',
         ),
         actions: [
@@ -195,7 +193,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   Text(
-                    _formatCurrency(widget.bankAccount.solde),
+                    FormatUtils.formatCurrency(widget.bankAccount.solde),
                     style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../utils/phone.dart';
 
 class ApiService {
   static const String baseUrl = 'https://digitalv2.afrilandfirstbank.com';
@@ -108,13 +109,9 @@ class ApiService {
     required String password,
   }) async {
     try {
-      // Déterminer le membre (12001 pour Orange, 12002 pour MTN)
-      String toMember = '12002'; // Par défaut MTN
-      if (beneficiaryPhone.startsWith('65') || beneficiaryPhone.startsWith('69')) {
-        toMember = '12001'; // Orange
-      } else if (beneficiaryPhone.startsWith('67') || beneficiaryPhone.startsWith('68')) {
-        toMember = '12002'; // MTN
-      }
+      // Normaliser le numéro de téléphone et déterminer l'opérateur
+      String normalizedPhone = PhoneUtils.normalizePhone(beneficiaryPhone);
+      String toMember = PhoneUtils.getOperatorMember(beneficiaryPhone);
 
       final response = await http.post(
         Uri.parse('$baseUrl/gimac/customer/v2/doTransferToOtherWallet'),
@@ -127,7 +124,7 @@ class ApiService {
         body: json.encode({
           'beneficiaryUserType': 'CUSTOMER',
           'beneficiaryWalletName': 'BENEFICIARY',
-          'recieverPhoneNumber': beneficiaryPhone,
+          'recieverPhoneNumber': normalizedPhone,
           'currencyCode': 'XAF',
           'amount': double.parse(amount).toStringAsFixed(0),
           'mfaToken': password,
