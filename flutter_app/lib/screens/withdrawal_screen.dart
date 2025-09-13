@@ -277,40 +277,20 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
             ),
             const SizedBox(height: 16),
             
-            // Options de retrait
+            // Option de retrait (uniquement transfert mobile pour le moment)
             Container(
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: const Color(0xFF2D3748),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Column(
+              child: const Row(
                 children: [
-                  RadioListTile<String>(
-                    value: 'atm',
-                    groupValue: _selectedMethod,
-                    onChanged: (value) => setState(() => _selectedMethod = value!),
-                    title: const Text(
-                      'Distributeur automatique',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    activeColor: Colors.white,
-                  ),
-                  const Divider(color: Colors.grey, height: 1),
-                  RadioListTile<String>(
-                    value: 'phone',
-                    groupValue: _selectedMethod,
-                    onChanged: (value) => setState(() => _selectedMethod = value!),
-                    title: const Row(
-                      children: [
-                        Icon(Icons.phone_android, color: Colors.white),
-                        SizedBox(width: 8),
-                        Text(
-                          'Transfert vers portefeuille mobile',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    activeColor: Colors.white,
+                  Icon(Icons.phone_android, color: Colors.white),
+                  SizedBox(width: 12),
+                  Text(
+                    'Transfert vers portefeuille mobile',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ],
               ),
@@ -323,29 +303,27 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
             const SizedBox(height: 24),
             
             // Numéro de téléphone bénéficiaire
-            if (_selectedMethod == 'phone') ...[
-              const Text(
-                'Numéro de téléphone bénéficiaire',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+            const Text(
+              'Numéro de téléphone bénéficiaire',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
               ),
-              const SizedBox(height: 12),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: TextField(
-                  controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(16),
-                    hintText: 'Ex: 650485614',
-                  ),
+              child: TextField(
+                controller: _phoneController,
+                keyboardType: TextInputType.phone,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(16),
+                  hintText: 'Ex: 650485614',
                 ),
               ),
-              const SizedBox(height: 24),
-            ],
+            ),
+            const SizedBox(height: 24),
             
             // Boutons d'action
             Row(

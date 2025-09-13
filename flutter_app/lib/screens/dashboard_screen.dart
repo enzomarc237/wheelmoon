@@ -27,8 +27,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     try {
       setState(() => _isLoading = true);
       
-      // Charger les comptes (utilise les données d'exemple pour le moment)
-      final accounts = await DataService.loadSampleAccounts();
+      // Essayer de charger depuis une URL si définie, sinon utiliser les données d'exemple
+      const accountsUrl = String.fromEnvironment('ACCOUNTS_URL');
+      List<CompteUtilisateur> accounts;
+      
+      if (accountsUrl.isNotEmpty) {
+        accounts = await DataService.loadAccountsFromUrl(accountsUrl);
+      } else {
+        accounts = DataService.loadSampleAccounts();
+      }
       
       setState(() {
         _accounts = accounts;

@@ -10,6 +10,8 @@ Une application mobile Flutter Android pour la gestion de comptes bancaires et l
 - **Détails des comptes** : Informations détaillées par compte avec comptes bancaires associés
 - **Retrait d'argent** : Processus complet de retrait vers un numéro de téléphone
 - **Interface moderne** : Design inspiré des meilleures pratiques fintech
+- **Gestion des erreurs** : Validation des données et feedback utilisateur
+- **Stockage des préférences** : État de connexion persistant
 
 ## Architecture
 
@@ -76,7 +78,7 @@ flutter run
 - Authentification par mot de passe à 6 chiffres
 - Validation des montants et soldes
 - Gestion des erreurs réseau et API
-- Stockage sécurisé des préférences utilisateur
+- Validation des formats de données avant envoi API
 
 ## Design
 

@@ -59,7 +59,7 @@ class ApiService {
           'walletTopupReq': {
             'countryCode': 'CM',
             'currencyCode': 'XAF',
-            'amount': amount,
+            'amount': double.parse(amount).toStringAsFixed(0),
           },
           'complementInfoDTO': {
             'paymentMethodCode': 'WALLET_CASH_IN_METHOD',
@@ -127,7 +127,7 @@ class ApiService {
           'beneficiaryWalletName': 'BENEFICIARY',
           'recieverPhoneNumber': beneficiaryPhone,
           'currencyCode': 'XAF',
-          'amount': amount,
+          'amount': double.parse(amount).toStringAsFixed(0),
           'mfaToken': password,
           'reason': '',
           'toMember': toMember,
