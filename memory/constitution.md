@@ -11,7 +11,7 @@
 ### [PRINCIPLE_2_NAME]
 <!-- Example: II. CLI Interface -->
 [PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats --> 
 
 ### [PRINCIPLE_3_NAME]
 <!-- Example: III. Test-First (NON-NEGOTIABLE) -->
